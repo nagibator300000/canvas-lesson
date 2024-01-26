@@ -1,4 +1,4 @@
-import generateArray from '@utils';
+import generateArray from '../../../utils/index';
 
 class Axis {
   constructor(
@@ -19,8 +19,8 @@ class Axis {
   }
 
   generateAxisParams(from = 0, to = 0, step = 1) {
-    this.axisStart = undefined;
-    this.labels = undefined;
+    this.labels = Axis.generateLabels(from, to + step, step);
+    this.axisStart = Axis.find_min(this.labels);
   }
 
   get from() {
@@ -30,6 +30,25 @@ class Axis {
   get to() {
     return this.labels.at(-1);
   }
-}
 
+  static find_min(c = []) {
+    return c.reduce((acc, cur) => {
+      if (Math.abs(cur) < Math.abs(acc)) {
+        return cur;
+      }
+      return acc;
+    }, c[0]);
+  }
+
+  static generateLabels(from, to, step) {
+    if (from < 0 && to > 0) {
+      const a = generateArray(step, -from + 1, step)
+        .map((e) => -e)
+        .reverse();
+      const b = generateArray(0, to, step);
+      return a.concat(b);
+    }
+    return generateArray(from, to, step);
+  }
+}
 export default Axis;
