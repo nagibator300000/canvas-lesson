@@ -8,12 +8,17 @@ class Axis {
       to = 10,
       step = 1,
       dashLength = 10,
+      labelOffset = 10,
       mirroredLabelLocation = false,
     } = {},
   ) {
     this.labels = [];
     this.axisStart = 0;
-
+    this.dashInterval = 0;
+    this.axisStart = 0;
+    this.canvas = canvas;
+    this.labelOffset = labelOffset;
+    this.ctx = canvas.getContext('2d');
     // init labels and axis start
     this.generateAxisParams(from, to, step);
   }
