@@ -1,13 +1,13 @@
 import Axis from './axis';
 
 class AxisX extends Axis {
-  constructor(...args) {
+  constructor(canvas, ...args) {
     super(...args);
-    this.TODO = undefined;
   }
 
   render() {
-    this.TODO = undefined;
+    this.ctx.beginPath();
+    this.ctx.lineTo(500);
   }
 }
 

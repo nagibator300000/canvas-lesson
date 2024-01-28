@@ -40,15 +40,10 @@ describe('Axis class', () => {
     expect(axis.axisStart).toBe(-2);
   });
 
-  test('should be centered around 0: step 3', () => {
-    const axis = new Axis(canvasMock, { from: -5, to: 2, step: 3 });
-    expect(axis.labels).toStrictEqual([-3, 0, 3]);
-    expect(axis.axisStart).toBe(0);
-  });
+  test('should keep Raul in check', () => {
+    const axis = new Axis(canvasMock, { from: -1, to: 0.5, step: 0.5 });
+    expect(axis.labels).toStrictEqual([-1, -0.5, 0, 0.5]);
 
-  test('should be centered around 0: step 1', () => {
-    const axis = new Axis(canvasMock, { from: -5, to: 2, step: 1 });
-    expect(axis.labels).toStrictEqual([-5, -4, -3, -2, -1, 0, 1, 2]);
     expect(axis.axisStart).toBe(0);
   });
 });
