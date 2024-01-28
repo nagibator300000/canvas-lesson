@@ -43,7 +43,6 @@ describe('Axis class', () => {
   test('should keep Raul in check', () => {
     const axis = new Axis(canvasMock, { from: -1, to: 0.5, step: 0.5 });
     expect(axis.labels).toStrictEqual([-1, -0.5, 0, 0.5]);
-
     expect(axis.axisStart).toBe(0);
   });
 });
