@@ -1,4 +1,4 @@
-import generateArray from '../../../utils/index';
+import generateArray from '@utils';
 
 class Axis {
   constructor(
@@ -13,7 +13,7 @@ class Axis {
     } = {},
   ) {
     this.labels = [];
-    this.axisStart = 0;
+    this.dashLength = dashLength;
     this.dashInterval = 0;
     this.axisStart = 0;
     this.canvas = canvas;
@@ -21,6 +21,7 @@ class Axis {
     this.ctx = canvas.getContext('2d');
     // init labels and axis start
     this.generateAxisParams(from, to, step);
+    this.mirroredLabelLocation = mirroredLabelLocation;
   }
 
   generateAxisParams(from = 0, to = 0, step = 1) {
@@ -47,9 +48,10 @@ class Axis {
 
   static generateLabels(from, to, step) {
     if (from < 0 && to > 0) {
-      const a = generateArray(step, -from + 1, step)
+      const a = generateArray(0, -from + step, step)
         .map((e) => -e)
         .reverse();
+      a.pop();
       const b = generateArray(0, to, step);
       return a.concat(b);
     }
