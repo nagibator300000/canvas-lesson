@@ -26,7 +26,7 @@ class Axis {
 
   generateAxisParams(from = 0, to = 0, step = 1) {
     this.labels = Axis.generateLabels(from, to + step, step);
-    this.axisStart = Axis.find_min(this.labels);
+    this.axisStart = Axis.findMin(this.labels);
   }
 
   get from() {
@@ -37,7 +37,7 @@ class Axis {
     return this.labels.at(-1);
   }
 
-  static find_min(c = []) {
+  static findMin(c = []) {
     return c.reduce((acc, cur) => {
       if (Math.abs(cur) < Math.abs(acc)) {
         return cur;
@@ -56,6 +56,10 @@ class Axis {
       return a.concat(b);
     }
     return generateArray(from, to, step);
+  }
+
+  get zeroPos() {
+    return this.labels.indexOf(this.axisStart) * this.ofs + this.dashStart;
   }
 }
 export default Axis;

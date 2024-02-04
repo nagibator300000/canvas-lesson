@@ -10,7 +10,14 @@ class LineChart {
   }
 
   render() {
-    this.TODO = undefined;
+    this.ctx.save();
+    this.ctx.translate(0, this.axisY.zeroPos);
+    this.axisX.render();
+    this.ctx.restore();
+    this.ctx.save();
+    this.ctx.translate(this.axisX.zeroPos, 0);
+    this.axisY.render();
+    this.ctx.restore();
   }
 }
 
