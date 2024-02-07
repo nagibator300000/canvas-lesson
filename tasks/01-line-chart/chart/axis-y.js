@@ -15,7 +15,7 @@ class AxisY extends Axis {
   render() {
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);
-    this.ctx.lineTo(0, 500);
+    this.ctx.lineTo(0, this.canvas.height);
     this.ctx.stroke();
     this.ctx.closePath();
     this.createLabels();
@@ -35,7 +35,6 @@ class AxisY extends Axis {
         this.ctx.fillText(
           `${this.labels[i]}`,
           this.mirroredLabelLocation ? -this.labelOffset : this.labelOffset,
-          // 0,
           pos,
         );
       }

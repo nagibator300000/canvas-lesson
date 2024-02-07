@@ -7,14 +7,14 @@ class AxisX extends Axis {
       this.from !== 0 && this.to !== 0 && this.axisStart === 0
         ? this.labels.length + 1
         : this.labels.length;
-    this.ofs = this.canvas.height / this.leng;
+    this.ofs = this.canvas.width / this.leng;
     this.dashStart = this.labels[0] !== this.axisStart ? this.ofs : 0;
   }
 
   render() {
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);
-    this.ctx.lineTo(500, 0);
+    this.ctx.lineTo(this.canvas.width, 0);
     this.ctx.stroke();
     this.ctx.closePath();
     this.createLabels();
