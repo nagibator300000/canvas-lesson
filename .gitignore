@@ -24,4 +24,6 @@ dist-ssr
 *.sw?
 
 cypress/screenshots
+cypress/downloads
 __diff_output__
+lib-dist
