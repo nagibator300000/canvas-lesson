@@ -27,14 +27,35 @@ class Snowfall {
     /** @type {HTMLCanvasElement} */
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'canvas-snowfall';
-    this.root.append(this.canvas);
     /** @type {CanvasRenderingContext2D} */
     this.ctx = this.canvas.getContext('2d');
+    this.canvas.className = 'canvas-snowfall';
     /** @type {Snowflake[]} */
     this.snowflakes = [];
     this.observer = new ResizeObserver(this.callback);
     this.observer.observe(this.canvas);
   }
+
+  add() {}
+
+  update() {}
+
+  remove() {}
+
+  /**
+   * Calculates snowflake speed
+   * @param {Snowflake} snowflake
+   * @returns {number}
+   */
+  getSnowflakeSpeed(snowflake) {
+    return (
+      (snowflake.radius /
+        (this.snowflakeSettings.maxSize - this.snowflakeSettings.minSize)) *
+      this.snowflakeSettings.fallSpeed
+    );
+  }
+
+  lifecycle = () => {};
 }
 
 export default Snowfall;
