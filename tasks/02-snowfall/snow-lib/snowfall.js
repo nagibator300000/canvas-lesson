@@ -16,6 +16,11 @@ class Snowfall {
    * @param {HTMLElement} [root] HTML element to which canvas elemnt is attached, defaults to `<body>`
    * @param {SnowflakeSettings} [snowflakeSettings]
    */
+  callback = () => {
+    this.canvas.width = this.canvas.clientWidth;
+    this.canvas.height = this.canvas.clientHeight;
+  };
+
   constructor(root = document.body, snowflakeSettings = {}) {
     /** @type {HTMLElement} */
     this.root = root;
@@ -27,6 +32,8 @@ class Snowfall {
     this.ctx = this.canvas.getContext('2d');
     /** @type {Snowflake[]} */
     this.snowflakes = [];
+    this.observer = new ResizeObserver(this.callback);
+    this.observer.observe(this.canvas);
   }
 }
 
