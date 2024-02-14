@@ -21,12 +21,21 @@ class Snowfall {
     this.canvas.height = this.canvas.clientHeight;
   };
 
+  unboxing = ({
+    amount = 10,
+    minSize = 10,
+    maxSize = 30,
+    fallSpeed = 10,
+  } = {}) => {
+    this.snowflakeSettings = { amount, minSize, maxSize, fallSpeed };
+  };
+
   constructor(root = document.body, snowflakeSettings = {}) {
     /** @type {HTMLElement} */
     this.root = root;
     /** @type {HTMLCanvasElement} */
     this.canvas = document.createElement('canvas');
-    this.canvas.className = 'canvas-snowfall';
+    this.root.append(this.canvas);
     /** @type {CanvasRenderingContext2D} */
     this.ctx = this.canvas.getContext('2d');
     this.canvas.className = 'canvas-snowfall';
@@ -34,13 +43,37 @@ class Snowfall {
     this.snowflakes = [];
     this.observer = new ResizeObserver(this.callback);
     this.observer.observe(this.canvas);
+    this.unboxing(snowflakeSettings);
   }
 
-  add() {}
+  add() {
+    while (this.snowflakes.length < this.snowflakeSettings.amount) {
+      this.snowflakes.push(
+        new Snowflake(
+          this.ctx,
+          randInt(0, this.canvas.width),
+          0,
+          randInt(
+            this.snowflakeSettings.minSize,
+            this.snowflakeSettings.maxSize,
+          ),
+        ),
+      );
+      // eslint-disable-next-line no-console
+      console.log(this.snowflakes.length);
+    }
+  }
 
-  update() {}
+  update() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.snowflakes.forEach((snowflake) => {
+      snowflake.moveBy(0, this.getSnowflakeSpeed(snowflake));
+    });
+  }
 
-  remove() {}
+  remove() {
+    this.snowflakes.filter((snowflake) => snowflake.y <= this.canvas.height);
+  }
 
   /**
    * Calculates snowflake speed
@@ -55,7 +88,12 @@ class Snowfall {
     );
   }
 
-  lifecycle = () => {};
+  lifecycle = () => {
+    this.add();
+    this.update();
+    this.remove();
+    requestAnimationFrame(this.lifecycle);
+  };
 }
 
 export default Snowfall;
