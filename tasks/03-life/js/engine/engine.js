@@ -8,7 +8,7 @@ export default class Engine {
   /**
    * @param {MouseEvent} event
    */
-  onClick = (event) => {};
+  // onClick = (event) => {};
 
   constructor(canvas, cycleLength = 500, scale = 10) {
     /** @type {HTMLCanvasElement} */
@@ -23,27 +23,29 @@ export default class Engine {
     this.initListeners();
   }
 
-  setCellNum(value) {}
+  // setCellNum(value) {}
 
-  play() {}
+  // play() {}
 
-  pause() {}
+  // pause() {}
 
-  clear() {}
+  // clear() {}
 
+  /** 1 Create an array */
   generateGrid() {}
 
-  updateGrid() {}
+  // updateGrid() {}
 
-  calculateNeighbours(row, col) {}
+  // calculateNeighbours(row, col) {}
 
+  /** 2 Render the grid */
   render() {}
 
   /**
    *
    * @param {number} currentTime Timestamp of a moment when this function was called
    */
-  loop = (currentTime = null) => {};
+  // loop = (currentTime = null) => {};
 
   initListeners() {
     this.canvas.addEventListener('click', this.onClick);
