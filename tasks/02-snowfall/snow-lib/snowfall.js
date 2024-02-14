@@ -22,7 +22,7 @@ class Snowfall {
   };
 
   unboxing = ({
-    amount = 10,
+    amount = 500,
     minSize = 10,
     maxSize = 30,
     fallSpeed = 10,
@@ -47,32 +47,27 @@ class Snowfall {
   }
 
   add() {
-    while (this.snowflakes.length < this.snowflakeSettings.amount) {
-      this.snowflakes.push(
-        new Snowflake(
-          this.ctx,
-          randInt(0, this.canvas.width),
-          0,
-          randInt(
-            this.snowflakeSettings.minSize,
-            this.snowflakeSettings.maxSize,
-          ),
-        ),
-      );
-      // eslint-disable-next-line no-console
-      console.log(this.snowflakes.length);
-    }
+    if (this.snowflakes.length >= this.snowflakeSettings.amount) return;
+    this.snowflakes.push(
+      new Snowflake(
+        this.ctx,
+        randInt(0, this.canvas.width),
+        0,
+        randInt(this.snowflakeSettings.minSize, this.snowflakeSettings.maxSize),
+      ),
+    );
   }
 
   update() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.snowflakes.forEach((snowflake) => {
       snowflake.moveBy(0, this.getSnowflakeSpeed(snowflake));
     });
   }
 
   remove() {
-    this.snowflakes.filter((snowflake) => snowflake.y <= this.canvas.height);
+    this.snowflakes = this.snowflakes.filter(
+      (snowflake) => snowflake.y <= this.canvas.height,
+    );
   }
 
   /**
@@ -90,6 +85,7 @@ class Snowfall {
 
   lifecycle = () => {
     this.add();
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.update();
     this.remove();
     requestAnimationFrame(this.lifecycle);
