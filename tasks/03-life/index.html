@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game of Life</title>
+
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      #root {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h1>Game of Life</h1>
+    </div>
+    <script type="module">
+      import Game from './js/index.js';
+
+      const root = document.querySelector('#root');
+      const game = new Game(root);
+    </script>
+  </body>
+</html>
